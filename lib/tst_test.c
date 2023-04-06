@@ -1340,7 +1340,7 @@ static void do_cleanup(void)
 	if (tst_tmpdir_created()) {
 		/* avoid munmap() on wrong pointer in tst_rmdir() */
 		tst_futexes = NULL;
-		//tst_rmdir();
+		tst_rmdir();
 	}
 
 	tst_sys_conf_restore(0);
