@@ -144,6 +144,7 @@ const char *tst_get_startwd(void)
 
 static int purge_dir(const char *path, char **errptr)
 {
+  printf("Purge path: %s\n", path);
 	int ret_val = 0;
 	DIR *dir;
 	struct dirent *dir_ent;
@@ -175,6 +176,7 @@ static int purge_dir(const char *path, char **errptr)
 
 	/* Loop through the entries in the directory, removing each one */
 	for (dir_ent = readdir(dir); dir_ent; dir_ent = readdir(dir)) {
+    printf("Dir name: %s\n", dir_ent->d_name);
 		/* Don't remove "." or ".." */
 		if (!strcmp(dir_ent->d_name, ".")
 		    || !strcmp(dir_ent->d_name, ".."))
@@ -271,6 +273,7 @@ void tst_tmpdir(void)
 	env_tmpdir = tst_get_tmpdir_root();
 	snprintf(template, PATH_MAX, "%s/LTP_%.3sXXXXXX", env_tmpdir, TCID);
 
+  printf("TEMPLATE: %s\n", template);
 	/* Make the temporary directory in one shot using mkdtemp. */
 	if (mkdtemp(template) == NULL) {
 		tst_brkm(TBROK | TERRNO, NULL,
@@ -283,6 +286,7 @@ void tst_tmpdir(void)
 			 "%s: strdup(%s) failed", __func__, template);
 		return;
 	}
+  printf("TESTDIR: %s\n", TESTDIR);
 
 	SAFE_CHOWN(NULL, TESTDIR, -1, getgid());
 

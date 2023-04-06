@@ -102,7 +102,7 @@ typedef __kernel_long_t	__kernel_old_time_t;
 #ifndef HAVE_STRUCT___KERNEL_OLD_TIMEVAL
 struct __kernel_old_timeval {
 	__kernel_old_time_t	tv_sec;		/* seconds */
-	__kernel_suseconds_t	tv_usec;	/* microseconds */
+	__kernel_long_t	tv_usec;	/* microseconds */
 };
 #endif
 

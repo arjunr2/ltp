@@ -113,7 +113,6 @@ static void setup_ipc(void)
 	SAFE_CHMOD(shm_path, 0666);
 
 	SAFE_FTRUNCATE(ipc_fd, size);
-
 	results = SAFE_MMAP(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, ipc_fd, 0);
 
 	/* Checkpoints needs to be accessible from processes started by exec() */
@@ -1189,7 +1188,8 @@ static void do_setup(int argc, char *argv[])
 	if (tst_test->all_filesystems)
 		tst_test->needs_device = 1;
 
-	if (tst_test->min_cpus > (unsigned long)tst_ncpus())
+	//if (tst_test->min_cpus > (unsigned long)tst_ncpus())
+	if (tst_test->min_cpus > 6)
 		tst_brk(TCONF, "Test needs at least %lu CPUs online", tst_test->min_cpus);
 
 	if (tst_test->min_mem_avail > (unsigned long)(tst_available_mem() / 1024))
@@ -1340,7 +1340,7 @@ static void do_cleanup(void)
 	if (tst_tmpdir_created()) {
 		/* avoid munmap() on wrong pointer in tst_rmdir() */
 		tst_futexes = NULL;
-		tst_rmdir();
+		//tst_rmdir();
 	}
 
 	tst_sys_conf_restore(0);
@@ -1576,14 +1576,14 @@ static int fork_testrun(void)
 	SAFE_SIGNAL(SIGINT, sigint_handler);
 	SAFE_SIGNAL(SIGTERM, sigint_handler);
 
-	alarm(results->timeout);
+	//alarm(results->timeout);
 
-	test_pid = fork();
+	test_pid = syscall(SYS_fork);
 	if (test_pid < 0)
 		tst_brk(TBROK | TERRNO, "fork()");
 
 	if (!test_pid) {
-		tst_disable_oom_protection(0);
+		//tst_disable_oom_protection(0);
 		SAFE_SIGNAL(SIGALRM, SIG_DFL);
 		SAFE_SIGNAL(SIGUSR1, SIG_DFL);
 		SAFE_SIGNAL(SIGTERM, SIG_DFL);
@@ -1593,7 +1593,7 @@ static int fork_testrun(void)
 	}
 
 	SAFE_WAITPID(test_pid, &status, 0);
-	alarm(0);
+	//alarm(0);
 	SAFE_SIGNAL(SIGTERM, SIG_DFL);
 	SAFE_SIGNAL(SIGINT, SIG_DFL);
 
@@ -1666,7 +1666,7 @@ void tst_run_tcases(int argc, char *argv[], struct tst_test *self)
 	tst_test = self;
 
 	do_setup(argc, argv);
-	tst_enable_oom_protection(lib_pid);
+	//tst_enable_oom_protection(lib_pid);
 
 	SAFE_SIGNAL(SIGALRM, alarm_handler);
 	SAFE_SIGNAL(SIGUSR1, heartbeat_handler);

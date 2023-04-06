@@ -389,8 +389,10 @@ int tst_validate_children_(const char *file, const int lineno,
 
 static struct tst_test test;
 
-int main(int argc, char *argv[])
+int main()
 {
+  char *argv[10] = { "test", NULL };
+  int argc = 1;
 	tst_run_tcases(argc, argv, &test);
 }
 

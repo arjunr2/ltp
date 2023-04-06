@@ -6,7 +6,7 @@
 #ifndef LAPI_POSIX_TYPES_H__
 #define LAPI_POSIX_TYPES_H__
 
-#include <linux/posix_types.h>
+//#include <linux/posix_types.h>
 
 #ifndef __kernel_long_t
 # if defined(__x86_64__) && defined(__ILP32__)
