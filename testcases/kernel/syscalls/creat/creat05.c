@@ -16,7 +16,7 @@
 #include <sys/resource.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <linux/limits.h>
+//#include <linux/limits.h>
 #include <unistd.h>
 #include "tst_test.h"
 

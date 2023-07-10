@@ -947,9 +947,9 @@ int safe_mount(const char *file, const int lineno, void (*cleanup_fn)(void),
 int safe_umount(const char *file, const int lineno, void (*cleanup_fn)(void),
 		const char *target)
 {
-	int rval;
+	int rval = -1;
 
-	rval = tst_umount(target);
+	//rval = tst_umount(target);
 
 	if (rval == -1) {
 		tst_brkm_(file, lineno, TBROK | TERRNO, cleanup_fn,

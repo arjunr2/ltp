@@ -34,7 +34,7 @@
 #define __linux_sctp_h__
 
 #include <stdint.h>
-#include <linux/types.h>
+//#include <linux/types.h>
 #include <sys/socket.h>
 
 #ifdef __cplusplus

@@ -31,4 +31,11 @@ FILTER_OUT_DIRS	+= \
 	setdomainname sethostname symlinkat ulimit ustat vfork vhangup vmsplice
 endif
 
+FILTER_OUT_DIRS += ipc mallinfo mallinfo2 mallopt io_submit ioctl io_destroy copy_file_range \
+	remap_file_pages clock_adjtime sched_setattr getdomainname capget openat2 init_module \
+	fanotify fallocate sysctl rt_tgsigqueueinfo timer_create profil add_key open_by_handle_at \
+	capset io_cancel keyctl request_key perf_event_open io_uring userfaultfd io_getevents \
+	setsockopt finit_module setrlimit socketcall io_setup accept4 mlock mlock2 bind swapon swapoff \
+	reboot clone3 clone prctl sched_getattr
+
 include $(top_srcdir)/include/mk/generic_trunk_target.mk

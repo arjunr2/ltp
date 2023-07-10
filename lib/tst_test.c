@@ -1332,10 +1332,10 @@ static void do_cleanup(void)
 		SAFE_UMOUNT(OVL_MNT);
 
 	if (mntpoint_mounted)
-		tst_umount(tst_test->mntpoint);
+		//tst_umount(tst_test->mntpoint);
 
 	if (tst_test->needs_device && tdev.dev)
-		tst_release_device(tdev.dev);
+		//tst_release_device(tdev.dev);
 
 	if (tst_tmpdir_created()) {
 		/* avoid munmap() on wrong pointer in tst_rmdir() */
@@ -1576,7 +1576,7 @@ static int fork_testrun(void)
 	SAFE_SIGNAL(SIGINT, sigint_handler);
 	SAFE_SIGNAL(SIGTERM, sigint_handler);
 
-	//alarm(results->timeout);
+	alarm(results->timeout);
 
 	test_pid = syscall(SYS_fork);
 	if (test_pid < 0)
@@ -1593,7 +1593,7 @@ static int fork_testrun(void)
 	}
 
 	SAFE_WAITPID(test_pid, &status, 0);
-	//alarm(0);
+	alarm(0);
 	SAFE_SIGNAL(SIGTERM, SIG_DFL);
 	SAFE_SIGNAL(SIGINT, SIG_DFL);
 
@@ -1639,7 +1639,7 @@ static int run_tcases_per_fs(void)
 		ret = fork_testrun();
 
 		if (mntpoint_mounted) {
-			tst_umount(tst_test->mntpoint);
+			//tst_umount(tst_test->mntpoint);
 			mntpoint_mounted = 0;
 		}
 

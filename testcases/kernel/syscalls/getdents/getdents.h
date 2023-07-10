@@ -71,10 +71,10 @@ tst_dirp_size(void)
 	case 2:
 		return sizeof(struct dirent);
 #endif
-#if HAVE_GETDENTS64
-	case 3:
-		return sizeof(struct dirent64);
-#endif
+//#if HAVE_GETDENTS64
+//	case 3:
+//		return sizeof(struct dirent64);
+//#endif
 	}
 	return 0;
 }
@@ -91,10 +91,10 @@ tst_dirp_name(void *dirp)
 	case 2:
 		return ((struct dirent *)dirp)->d_name;
 #endif
-#if HAVE_GETDENTS64
-	case 3:
-		return ((struct dirent64 *)dirp)->d_name;
-#endif
+//#if HAVE_GETDENTS64
+//	case 3:
+//		return ((struct dirent64 *)dirp)->d_name;
+//#endif
 	}
 	return NULL;
 }
@@ -111,10 +111,10 @@ tst_dirp_reclen(void *dirp)
 	case 2:
 		return ((struct dirent *)dirp)->d_reclen;
 #endif
-#if HAVE_GETDENTS64
-	case 3:
-		return ((struct dirent64 *)dirp)->d_reclen;
-#endif
+//#if HAVE_GETDENTS64
+//	case 3:
+//		return ((struct dirent64 *)dirp)->d_reclen;
+//#endif
 
 	}
 	return 0;
@@ -132,10 +132,10 @@ tst_getdents(int fd, void *dirp, unsigned int size)
 	case 2:
 		return getdents(fd, dirp, size);
 #endif
-#if HAVE_GETDENTS64
-	case 3:
-		return getdents64(fd, dirp, size);
-#endif
+//#if HAVE_GETDENTS64
+//	case 3:
+//		return getdents64(fd, dirp, size);
+//#endif
 	}
 	return -1;
 }

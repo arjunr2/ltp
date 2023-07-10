@@ -28,7 +28,8 @@
    by Masatake YAMATO <yamato@redhat.com> */
 
 #include <sys/types.h>
-#include <linux/unistd.h>
+//#include <linux/unistd.h>
+#include <unistd.h>
 #include <errno.h>
 
 #include "test.h"
@@ -42,7 +43,7 @@ int TST_TOTAL = 1;
 
 pid_t my_gettid(void)
 {
-	return (pid_t) syscall(__NR_gettid);
+	return (pid_t) gettid();
 }
 
 int main(int ac, char **av)

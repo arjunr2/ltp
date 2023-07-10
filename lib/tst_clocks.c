@@ -13,6 +13,7 @@
 #include "lapi/posix_clocks.h"
 
 typedef int (*mysyscall)(clockid_t clk_id, void *ts);
+typedef int (*mysyscall2)(clockid_t clk_id, struct timespec *ts);
 
 int syscall_supported_by_kernel(long sysnr)
 {
@@ -58,7 +59,7 @@ int tst_clock_getres(clockid_t clk_id, struct timespec *res)
 int tst_clock_gettime(clockid_t clk_id, struct timespec *ts)
 {
 	static struct tst_ts tts = { 0, };
-	static mysyscall func;
+	static mysyscall2 func = clock_gettime;
 	int ret;
 
 #if (__NR_clock_gettime64 != __LTP__NR_INVALID_SYSCALL)
@@ -68,10 +69,10 @@ int tst_clock_gettime(clockid_t clk_id, struct timespec *ts)
 	}
 #endif
 
-	if (!func && syscall_supported_by_kernel(__NR_clock_gettime)) {
-		func = sys_clock_gettime;
-		tts.type = TST_KERN_OLD_TIMESPEC;
-	}
+	//if (!func && syscall_supported_by_kernel(__NR_clock_gettime)) {
+	//	func = sys_clock_gettime;
+	//	tts.type = TST_KERN_OLD_TIMESPEC;
+	//}
 
 	if (!func) {
 		tst_res(TCONF, "clock_gettime() not available");
