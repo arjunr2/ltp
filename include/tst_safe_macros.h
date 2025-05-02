@@ -22,7 +22,7 @@
 #include <grp.h>
 
 #include "safe_macros_fn.h"
-#include "tst_cmd.h"
+// #include "tst_cmd.h"
 
 int safe_access(const char *filename, const int lineno, const char *pathname,
 		   int mode);

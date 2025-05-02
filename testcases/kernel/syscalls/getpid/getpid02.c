@@ -14,7 +14,9 @@
 
 #include <errno.h>
 
-#include "tst_test.h"
+// #include "tst_test.h"
+
+#include "unit_test.h"
 
 static pid_t *child_pid;
 

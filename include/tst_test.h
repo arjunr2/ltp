@@ -45,9 +45,12 @@
 #include "tst_memutils.h"
 #include "tst_arch.h"
 
+
+
 /*
  * Reports testcase result.
  */
+#ifndef tst_res
 void tst_res_(const char *file, const int lineno, int ttype,
               const char *fmt, ...)
               __attribute__ ((format (printf, 4, 5)));
@@ -58,6 +61,7 @@ void tst_res_(const char *file, const int lineno, int ttype,
 			(TCONF | TFAIL | TINFO | TPASS | TWARN))); 				\
 		tst_res_(__FILE__, __LINE__, (ttype), (arg_fmt), ##__VA_ARGS__);\
 	})
+#endif
 
 void tst_resm_hexd_(const char *file, const int lineno, int ttype,
 	const void *buf, size_t size, const char *arg_fmt, ...)
@@ -70,16 +74,18 @@ void tst_resm_hexd_(const char *file, const int lineno, int ttype,
 /*
  * Reports result and exits a test.
  */
-void tst_brk_(const char *file, const int lineno, int ttype,
-              const char *fmt, ...)
-              __attribute__ ((format (printf, 4, 5)));
+#ifndef tst_brk
+	void tst_brk_(const char *file, const int lineno, int ttype,
+				const char *fmt, ...)
+				__attribute__ ((format (printf, 4, 5)));
 
-#define tst_brk(ttype, arg_fmt, ...)						\
-	({									\
-		TST_BRK_SUPPORTS_ONLY_TCONF_TBROK(!((ttype) &			\
-			(TBROK | TCONF | TFAIL))); 				\
-		tst_brk_(__FILE__, __LINE__, (ttype), (arg_fmt), ##__VA_ARGS__);\
-	})
+	#define tst_brk(ttype, arg_fmt, ...)						\
+		({									\
+			TST_BRK_SUPPORTS_ONLY_TCONF_TBROK(!((ttype) &			\
+				(TBROK | TCONF | TFAIL))); 				\
+			tst_brk_(__FILE__, __LINE__, (ttype), (arg_fmt), ##__VA_ARGS__);\
+		})
+#endif
 
 void tst_printf(const char *const fmt, ...)
 		__attribute__((nonnull(1), format (printf, 1, 2)));
@@ -87,9 +93,12 @@ void tst_printf(const char *const fmt, ...)
 /* flush stderr and stdout */
 void tst_flush(void);
 
-pid_t safe_fork(const char *filename, unsigned int lineno);
-#define SAFE_FORK() \
-	safe_fork(__FILE__, __LINE__)
+#ifndef SAFE_FORK
+	pid_t safe_fork(const char *filename, unsigned int lineno);
+	#define SAFE_FORK() \
+		safe_fork(__FILE__, __LINE__)
+
+#endif
 
 #define TST_TRACE(expr)	                                            \
 	({int ret = expr;                                           \

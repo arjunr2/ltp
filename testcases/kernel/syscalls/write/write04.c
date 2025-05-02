@@ -18,7 +18,9 @@
 #include <errno.h>
 #include <string.h>
 #include <stdio.h>
-#include "tst_test.h"
+// #include "tst_test.h"
+#include "unit_test.h"
+
 
 static char fifo[100];
 static int rfd, wfd;

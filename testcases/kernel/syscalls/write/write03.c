@@ -16,10 +16,11 @@
  *	file in RDONLY mode, and read the contents of the file. Compare the
  *	buffers, to see whether they are same.
  */
-
+#define TST_NO_DEFAULT_MAIN
 #include <stdio.h>
 #include <errno.h>
-#include "tst_test.h"
+// #include "tst_test.h"
+#include "unit_test.h"
 
 static char *bad_addr;
 static char wbuf[BUFSIZ], rbuf[BUFSIZ];

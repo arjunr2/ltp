@@ -22,7 +22,8 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <sys/mman.h>
-#include "tst_test.h"
+// #include "tst_test.h"
+#include "unit_test.h"
 
 static int fd;
 static int inv_fd = -1;

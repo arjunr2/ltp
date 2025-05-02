@@ -354,6 +354,7 @@ void tst_res_(const char *file, const int lineno, int ttype,
 	va_end(va);
 }
 
+#ifndef tst_brk_
 void tst_brk_(const char *file, const int lineno, int ttype,
               const char *fmt, ...)
 {
@@ -363,6 +364,7 @@ void tst_brk_(const char *file, const int lineno, int ttype,
 	tst_brk_handler(file, lineno, ttype, fmt, va);
 	va_end(va);
 }
+#endif
 
 void tst_printf(const char *const fmt, ...)
 {

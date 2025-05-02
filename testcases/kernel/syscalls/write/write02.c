@@ -7,8 +7,12 @@
  * Tests for a special case NULL buffer with size 0 is expected to return 0.
  */
 
+ #define TST_NO_DEFAULT_MAIN
+
+
 #include <errno.h>
-#include "tst_test.h"
+//#include "tst_test.h"
+#include "unit_test.h"
 
 static int fd;
 
